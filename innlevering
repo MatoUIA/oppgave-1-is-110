@@ -184,7 +184,7 @@ namespace Universitetssystem
 
         static void SeedData()
         {
-            alleBrukere.Add(new Utvekslingsstudent { Navn = "John Doe", Land = "USA", Hjemuniversitet = "Harvard" });
+            alleBrukere.Add(new Utvekslingsstudent { Navn = "Chris Laird", Land = "USA", Hjemuniversitet = "Harvard" });
             alleBrukere.Add(new Ansatt { Navn = "Kari", Stilling = "Bibliotekar", Avdeling = "Humaniora" });
             alleKurs.Add(new Kurs { Kode = "C1", Navn = "Programmering", Studiepoeng = 10, MaksPlasser = 30 });
             bibliotek.Add(new Bok { Tittel = "C# Manualen", Aar = 2023, AntallEksemplarer = 5 });
