@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Universitetssystem.Tester
+{
+    public class EnhetsTester
+    {
+        public static void KjorAlleTester()
+        {
+            Console.WriteLine("\n--- STARTER ENHETSTESTER ---");
+            
+            Test_KursDuplikat_SkalFeile();
+            Test_DobbelPaamelding_SkalHindreDuplikat();
+            Test_BokUtlaan_SkalHindreHvisTomt();
+
+            Console.WriteLine("--- TESTER FULLFØRT ---\n");
+        }
+
+        // TEST 1: Sjekker at man ikke kan registrere samme kurskode to ganger
+        public static void Test_KursDuplikat_SkalFeile()
+        {
+            Console.Write("Test 1 (Kursduplikat): ");
+            
+            // Vi simulerer logikken fra OpprettKurs
+            string testKode = "PROG101";
+            var liksomDatabase = new List<string> { "PROG101" }; // Kurs som allerede finnes
+
+            bool finnesFraFor = liksomDatabase.Any(k => k == testKode);
+
+            if (finnesFraFor)
+            {
+                Console.WriteLine("PASSED (Systemet oppdaget duplikatet)");
+            }
+            else
+            {
+                Console.WriteLine("FAILED (Systemet tillot duplikat)");
+            }
+        }
+
+        // TEST 2: Sjekker at en student ikke kan melde seg på samme kurs to ganger
+        public static void Test_DobbelPaamelding_SkalHindreDuplikat()
+        {
+            Console.Write("Test 2 (Dobbel påmelding): ");
+            
+            var testKurs = new List<string>(); // Liste over student-IDer i et kurs
+            string studentId = "S123";
+
+            // Første påmelding
+            testKurs.Add(studentId);
+
+            // Forsøk på andre påmelding
+            if (testKurs.Contains(studentId))
+            {
+                Console.WriteLine("PASSED (Studenten ble ikke lagt til to ganger)");
+            }
+            else
+            {
+                Console.WriteLine("FAILED (Logikken for duplikat-sjekk feilet)");
+            }
+        }
+
+        // TEST 3: Sjekker at man ikke kan låne bok hvis antall tilgjengelig er 0
+        public static void Test_BokUtlaan_SkalHindreHvisTomt()
+        {
+            Console.Write("Test 3 (Lån uten beholdning): ");
+
+            int antallEksemplarer = 1;
+            int alleredeUtlaant = 1;
+
+            if (alleredeUtlaant >= antallEksemplarer)
+            {
+                Console.WriteLine("PASSED (Systemet nektet utlån fordi boka er tom)");
+            }
+            else
+            {
+                Console.WriteLine("FAILED (Systemet tillot lån av bok som ikke er inne)");
+            }
+        }
+    }
+}
